@@ -18,18 +18,18 @@ The `build.rs` script uses `idalib-build` to auto-configure IDA SDK linkage. It 
 
 ```bash
 # Build
-cargo build --release     # optimized (LTO, stripped, O3)
-cargo build               # debug build
+cargo build --release --locked     # optimized (LTO, stripped, O3)
+cargo build --locked               # debug build
 
 # Test (uses a custom harness, not the standard Rust test framework)
-cargo test --test tests
+cargo test --test tests --locked
 
 # Lint & format (CI enforces these as errors)
 cargo fmt --all --check
-cargo clippy --all-targets -- -D warnings
+cargo clippy --all-targets --locked -- -D warnings
 
 # Documentation (CI enforces this as an error via RUSTDOCFLAGS=-D warnings)
-cargo doc
+cargo doc --locked
 
 # Dependency vulnerability audit (CI enforces this; requires cargo-audit)
 cargo audit
